@@ -74,10 +74,15 @@
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${geo.lat}&lon=${geo.lon}&appid=${api_key}`)
                 .then(function(response) {
-                    console.log(response);
+                    var fahrenheit = response.data.main.temp - 209;
+                    var celsius = (fahrenheit - 32) / 1.8;
+                    var city = response.data.name;
+
+                    $('#cityTempGeo').text(city);
+                    $('#celsiusTempGeo').text(celsius.toFixed(2));
                 })
                 .catch(function(error) {
-                    console.log(error);
+                    alert(error);
                 })
         }
     </script>
